@@ -86,4 +86,16 @@ public class ClientController {
 
 
     }
+
+    @GetMapping("/login/{name}/{password}")
+    public ResponseEntity<Client> getByEmailAndPassword(@PathVariable String name, @PathVariable String password){
+        Client client = clientService.findByNameAndPassword(name, password);
+        //UserDto userDto = UserMapper.modelToDto(user);
+
+       // UserDto userDto = new UserDto(client.getId(), client.getName());
+
+
+        return new ResponseEntity<>( client, HttpStatus.OK);
+    }
+
 }

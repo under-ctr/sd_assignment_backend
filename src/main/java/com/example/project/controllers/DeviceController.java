@@ -66,6 +66,15 @@ public class DeviceController {
 
         return ResponseEntity.noContent().build();
     }
+    @GetMapping(value = "/client/{id}")
+    public ResponseEntity<List<Device>> getDeviceByClientId(@PathVariable("id") Long clientId) {
+        //UserDto dto = clientService.findClientById(clientId);
+        //Client client = clientService.fin
+        List<Device> devices = deviceService.getDeviceByClientId(clientId);
+
+        return new ResponseEntity<>(devices, HttpStatus.OK);
+    }
+
 
 
 }

@@ -6,6 +6,7 @@ import com.example.project.entitys.Client;
 import com.example.project.entitys.Device;
 import com.example.project.repositories.ClientRepository;
 import com.example.project.repositories.DeviceRepository;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,12 @@ public class ClientService {
         else{
             LOGGER.error("No such device on client ", clientId);
         }
+    }
+    public Client findByNameAndPassword(String name, String password){
+        Client client = clientRepository.findByNameAndPassword(name, password)
+                .orElseThrow(() -> new ResourceNotFoundException("client not found"));
+
+        return client;
     }
    /* public UserDto findClientById(Long id) {
         Optional<Client> prosumerOptional = ClientRepository.findById(id);

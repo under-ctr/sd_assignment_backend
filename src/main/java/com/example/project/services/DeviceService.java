@@ -3,6 +3,7 @@ package com.example.project.services;
 
 import com.example.project.entitys.Device;
 import com.example.project.repositories.DeviceRepository;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +58,11 @@ public class DeviceService {
 
     public void delete (Long deviceId){
         deviceRepository.deleteById(deviceId);
+    }
+
+    public List<Device> getDeviceByClientId(Long clientId){
+        List<Device> devices = deviceRepository.findByClientId(clientId).orElseThrow();
+
+        return devices;
     }
 }
